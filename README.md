@@ -15,8 +15,11 @@ Usage:
 
 Example:
 
-    $ ./bannerscanner -p 22,53 192.168.2.0/28
-    {"level":"info","state":"open","host":"192.168.2.10","port":22,"banner":"SSH-2.0-nope\n","time":"2018-05-16T16:46:17-04:00","message":"found service"}
-    {"level":"info","state":"open","host":"192.168.2.11","port":22,"banner":"SSH-2.0-nope\r\nProtocol mismatch.\n","time":"2018-05-16T16:46:17-04:00","message":"found service"}
-    {"level":"info","state":"open","host":"192.168.2.1","port":22,"banner":"SSH-2.0-nope\r\n","time":"2018-05-16T16:46:17-04:00","message":"found service"}
-    {"level":"info","state":"open","host":"192.168.2.1","port":53,"banner":"","time":"2018-05-16T16:46:19-04:00","message":"found service"}
+   # time PORTS=5038 RATE=2000 IP=195.90.1.0/24  ./bannerscanner 
+{"level":"info","state":"open","host":"195.90.1.128","port":5038,"banner":"\r\n\r\n","time":"2020-10-06T16:12:17Z","message":"found service"}
+{"level":"info","state":"open","host":"195.90.1.143","port":5038,"banner":"\ufffd\ufffd,","time":"2020-10-06T16:12:17Z","message":"found service"}
+
+real	0m2.025s
+user	0m0.010s
+sys	0m0.022s
+[root]#
