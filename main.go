@@ -9,6 +9,7 @@ import (
 	"sync"
 	"syscall"
 	"time"
+	"strconv"
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
@@ -218,8 +219,12 @@ func expandPorts(portSpecs []string) ([]int, error) {
 
 func main() {
 
-	scanRate := flag.Int("rate", 1000, "rate in attempts/sec")
-	portspecs := flag.StringSliceP("port", "p", []string{}, "ports to scan. ex: 80,443,8000-8100")
+//	scanRate := flag.Int("rate", 1000, "rate in attempts/sec")
+	s,err := strconv.Atoi(os.Getenv("RATE"))
+	scanRate := &s
+//	portspecs := flag.StringSliceP("port", "p", []string{}, "ports to scan. ex: 80,443,8000-8100")
+	p:=  []string{os.Getenv("PORTS")}
+	portspecs := &p
 	dialTimeout := flag.Duration("timeout", 2*time.Second, "Scan connection timeout")
 	bannerTimeout := flag.Duration("banner-timeout", 2*time.Second, "timeout when fetching banner")
 	debug := flag.Bool("debug", false, "sets log level to debug")
@@ -259,9 +264,13 @@ func main() {
 		log.Fatal().Err(err).Msg("Error setting rlimit")
 	}
 
+	in:=  []string{os.Getenv("IP")}
+	ips := &in
+
 	sc := ScanConfiguration{
 		ports:     ports,
-		include:   flag.Args(),
+//		include:   flag.Args(),
+		include:   *ips,
 		exclude:   *exclude,
 		parallel:  *parallel,
 		randomize: true,
